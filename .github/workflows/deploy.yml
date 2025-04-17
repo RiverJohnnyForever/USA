@@ -1,4 +1,4 @@
-name: Build and Deploy Website
+name: Deploy Secure Site
 
 on:
   push:
@@ -10,32 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    - name: Create password protected webpage
+    - name: Create password.js from secret
       run: |
-        echo "Creating index.html..."
-        echo '<!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <title>Private Notes</title>
-        </head>
-        <body>
-          <script>
-            const correctPassword = "${{ secrets.PASSWORD }}";
-            const password = prompt("请输入密码：");
-            if (password === correctPassword) {
-                document.body.innerHTML = "<h1>欢迎访问！</h1><p>这是你的私密笔记内容。</p>";
-            } else {
-                document.body.innerHTML = "<h1>访问被拒绝</h1>";
-            }
-          </script>
-        </body>
-        </html>' > index.html
+        echo "const PASSWORD = '${{ secrets.PASSWORD }}';" > password.js
 
-    - name: Deploy to GitHub Pages
+    - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages
