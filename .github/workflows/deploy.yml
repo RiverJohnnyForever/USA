@@ -1,0 +1,43 @@
+name: Build and Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create password protected webpage
+      run: |
+        echo "Creating index.html..."
+        echo '<!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Private Notes</title>
+        </head>
+        <body>
+          <script>
+            const correctPassword = "${{ secrets.PASSWORD }}";
+            const password = prompt("请输入密码：");
+            if (password === correctPassword) {
+                document.body.innerHTML = "<h1>欢迎访问！</h1><p>这是你的私密笔记内容。</p>";
+            } else {
+                document.body.innerHTML = "<h1>访问被拒绝</h1>";
+            }
+          </script>
+        </body>
+        </html>' > index.html
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: .
+        token: ${{ secrets.GITHUB_TOKEN }}
