@@ -15,7 +15,7 @@ jobs:
 
     - name: Create password.js from secret
       run: |
-        echo "const PASSWORD = '${{ secrets.PASSWORD }}';" > password.js
+        echo "const PASSWORD = '${{ secrets.PASSWORD }}';" > xlib.js
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
