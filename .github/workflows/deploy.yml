@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Create password.js from secret
+    - name: Create xlib.js from secret
       run: |
         echo "const PASSWORD = '${{ secrets.PASSWORD }}';" > xlib.js
 
