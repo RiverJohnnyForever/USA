@@ -22,7 +22,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: RiverJohnnyForever/USA_Private
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PRIVATE_REPO_PAT }}
         ref: main
 
     - name: Create xlib.js from secret
