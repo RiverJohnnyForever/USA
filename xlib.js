@@ -1,0 +1,1 @@
+const PASSWORD = 'p234';
