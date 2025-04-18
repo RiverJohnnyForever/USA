@@ -23,6 +23,7 @@ jobs:
       with:
         repository: RiverJohnnyForever/USA_Private
         token: ${{ secrets.GITHUB_TOKEN }}
+        ref: main
 
     - name: Create xlib.js from secret
       run: |
