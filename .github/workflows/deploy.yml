@@ -27,7 +27,7 @@ jobs:
 
     - name: Create xlib.js from secret
       run: |
-        echo "const PASSWORD = '${{ secrets.xlib }}';" > xlib.js
+        echo "const PASSWORD = '${{ secrets.XLIB }}';" > xlib.js
 
     - name: Create index.html for GitHub Pages
       run: |
