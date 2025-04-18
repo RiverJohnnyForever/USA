@@ -1,1 +1,1 @@
-const PASSWORD = 'p234567890q';
+const PASSWORD = '123';
