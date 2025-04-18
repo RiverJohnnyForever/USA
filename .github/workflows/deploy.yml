@@ -25,9 +25,15 @@ jobs:
         token: ${{ secrets.PRIVATE_REPO_PAT }}
         ref: main
 
+    - name: Debug secret
+      run: echo "The password from secrets.XLIB is '${{ secrets.XLIB }}'"
+
     - name: Create xlib.js from secret
       run: |
         echo "const PASSWORD = '${{ secrets.XLIB }}';" > xlib.js
+
+    - name: Check the content of xlib.js
+      run: cat xlib.js
 
     - name: Create index.html for GitHub Pages
       run: |
