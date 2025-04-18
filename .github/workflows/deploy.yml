@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Secure Website
 
 on:
   push:
@@ -6,23 +6,26 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Fetch xlib.js from private repo
-        run: |
-          git clone https://${{ secrets.YOUR_TOKEN }}@github.com/<YOUR_NAME>/_blog.git
-          cp _blog/xlib.js ./dist
-          
-      - name: Push to Pages
-        working-directory: ./dist
-        run: |
-          git init
-          git checkout -b gh-pages
-          git add -A
-          git commit -m 'Deploy website'
-          git remote add origin https://${{ secrets.YOUR_TOKEN }}@github.com/<YOUR_NAME>/blog.git
-          git push origin gh-pages -f -q
+    - name: Checkout private repository for password
+      uses: actions/checkout@v3
+      with:
+        repository: RiverJohnnyForever/USA_Private
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create xlib.js from secret
+      run: |
+        echo "const PASSWORD = '${{ secrets.xlib }}';" > xlib.js
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: .
+        token: ${{ secrets.GITHUB_TOKEN }}
