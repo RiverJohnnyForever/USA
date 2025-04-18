@@ -25,8 +25,9 @@ jobs:
         token: ${{ secrets.PRIVATE_REPO_PAT }}
         ref: main
 
-    - name: Debug secret
-      run: echo "The password from secrets.XLIB is '${{ secrets.XLIB }}'"
+    - name: Debug secret (checking if XLIB exists)
+      run: |
+        echo "The password from secrets.XLIB is '${{ secrets.XLIB }}'"
 
     - name: Create xlib.js from secret
       run: |
