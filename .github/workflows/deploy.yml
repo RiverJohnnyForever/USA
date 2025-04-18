@@ -28,7 +28,6 @@ jobs:
     - name: Create xlib.js from secret
       run: |
         echo "const PASSWORD = '${{ secrets.XLIB }}';" > xlib.js
-        cat xlib.js  # 调试步骤：输出xlib.js内容
 
     - name: Create index.html for GitHub Pages
       run: |
